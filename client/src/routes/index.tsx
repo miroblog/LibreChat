@@ -7,6 +7,7 @@ import {
   ApiErrorWatcher,
   TwoFactorScreen,
   RequestPasswordReset,
+  AccessDenied,
 } from '~/components/Auth';
 import { MarketplaceProvider } from '~/components/Agents/MarketplaceContext';
 import AgentMarketplace from '~/components/Agents/Marketplace';
@@ -33,6 +34,11 @@ const baseHref = baseEl?.getAttribute('href') || '/';
 
 export const router = createBrowserRouter(
   [
+    {
+      path: 'access-denied',
+      element: <AccessDenied />,
+      errorElement: <RouteErrorBoundary />,
+    },
     {
       path: 'share/:shareId',
       element: <ShareRoute />,

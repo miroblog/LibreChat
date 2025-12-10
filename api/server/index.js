@@ -27,6 +27,7 @@ const initializeMCPs = require('./services/initializeMCPs');
 const configureSocialLogins = require('./socialLogins');
 const { getAppConfig } = require('./services/Config');
 const staticCache = require('./utils/staticCache');
+const ipWhitelist = require('./middleware/ipWhitelist');
 const noIndex = require('./middleware/noIndex');
 const { seedDatabase } = require('~/models');
 const routes = require('./routes');
@@ -80,6 +81,7 @@ const startServer = async () => {
 
   /* Middleware */
   app.use(noIndex);
+  app.use(ipWhitelist);
   app.use(express.json({ limit: '3mb' }));
   app.use(express.urlencoded({ extended: true, limit: '3mb' }));
   app.use(handleJsonParseError);

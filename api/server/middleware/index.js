@@ -15,6 +15,7 @@ const requireJwtAuth = require('./requireJwtAuth');
 const configMiddleware = require('./config/app');
 const validateModel = require('./validateModel');
 const moderateText = require('./moderateText');
+const ipWhitelist = require('./ipWhitelist');
 const logHeaders = require('./logHeaders');
 const setHeaders = require('./setHeaders');
 const validate = require('./validate');
@@ -31,6 +32,7 @@ module.exports = {
   ...roles,
   ...accessResources,
   noIndex,
+  ipWhitelist,
   checkBan,
   uaParser,
   setHeaders,

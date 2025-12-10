@@ -92,6 +92,16 @@ if (typeof window !== 'undefined') {
         return Promise.reject(error);
       }
 
+      // Handle IP whitelist block - redirect to access denied page
+      if (
+        error.response.status === 403 &&
+        error.response.data?.message === 'IP_NOT_ALLOWED'
+      ) {
+        const ip = error.response.data?.ip || '';
+        window.location.href = endpoints.accessDeniedPage() + (ip ? `?ip=${ip}` : '');
+        return Promise.reject(error);
+      }
+
       if (originalRequest.url?.includes('/api/auth/2fa') === true) {
         return Promise.reject(error);
       }
